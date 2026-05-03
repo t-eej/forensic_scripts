@@ -1,0 +1,13 @@
+#!/bin/bash
+SIG_FILE="./signatures/web_attacks.sig"
+LOG_FILE=$1
+
+echo "--- [MODULE] SIGNATURE-BASED DETECTION ---"
+
+if [ ! -f "$SIG_FILE" ]; then
+    echo "Error: Signature file not found at $SIG_FILE"
+    exit1
+fi
+
+# -f read patterns from the file, -1 makes it case-insensitive
+grep -if "$SIG_FILE" "$LOG_FILE" | awk '{print "MATCH FOUND:", $5, "from IP:", $3}' | sort | uniq -c
