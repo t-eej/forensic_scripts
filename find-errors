@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "--- [MODULE] 4xx/5xx ERROR ANALYSIS ---"
+grep -E " 40[0-9] | 50[0-9] " "$1" | awk '{print $7, $3, $5}' | sort | uniq -c | sort -nr | head -n 5

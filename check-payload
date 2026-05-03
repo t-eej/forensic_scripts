@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "--- [MODULE] HIGH-PAYLOAD DETECTION (EXFIL) ---"
+awk '$6 > 400 {print "SIZE:", $6, "bytes | IP:", $3, " | PATH:", $5}' "$1" | sort -nr | head -n 5
